@@ -3,14 +3,16 @@ let express = require('express');
 let app = express();
 let sequelize = require('./db');  
 
-let logbook = require('./controllers/logcontroller');
+let log = require('./controllers/logcontroller');
 let user = require('./controllers/usercontroller');
 
 sequelize.sync();
 
+app.use(require('./middleware/headers'));
+
 app.use(express.json());
 
-app.use('/logbook', logbook);
+app.use('/log', log);
 app.use('/user', user);
 
 

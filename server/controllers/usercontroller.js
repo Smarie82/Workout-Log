@@ -6,12 +6,12 @@ const bcrypt = require('bcryptjs');
 router.post('/register', function (req, res) {
 
     User.create({
-        email: req.body.user.email,
-        password: bcrypt.hashSync(req.body.user.password, 15)
+        username: req.body.user.username,
+        passwordhash: bcrypt.hashSync(req.body.user.passwordhash, 15)
     })
     .then(
         function createSuccess(user) {
-            let token = jwt.sign({ id: user.id, email: user.email}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
+            let token = jwt.sign({ id: user.id, user: user.username}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
             res.json({
                 user: user,
                 message: 'You are Registered!',
@@ -25,12 +25,12 @@ router.post('/register', function (req, res) {
 router.post('/login', function(req, res) {
     User.findOne({
         where: {
-            email: req.body.user.email
+            user: req.body.user.username
         }
     })
     .then(function loginSuccess(user) {
         if (user) {
-            bcrypt.compare(req.body.user.password, user.password, function (err, matches){
+            bcrypt.compare(req.body.user.passwordhash, user.passwordhash, function (err, matches){
                 if (matches) {
 
             let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24})
