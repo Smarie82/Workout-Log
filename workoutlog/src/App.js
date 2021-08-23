@@ -1,25 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import Sitebar from './home/Navbar';
-import Auth from './auth/Auth';
+import React, { useState, useEffect } from "react";
+import Sitebar from "./home/Navbar";
+import Auth from "./auth/Auth";
 
 function App() {
-  const [sessionToken, setSessionToken] = useState('');
+  const [sessionToken, setSessionToken] = useState("");
   useEffect(() => {
-    if (localStorage.getItem('token')){
-      setSessionToken(localStorage.getItem('token'));
+    if (localStorage.getItem("token")) {
+      setSessionToken(localStorage.getItem("token"));
     }
-  }, [])
-  
+  }, []);
+
   const updateToken = (newToken) => {
-    localStorage.setItem('token', newToken);
+    localStorage.setItem("token", newToken);
     setSessionToken(newToken);
     console.log(sessionToken);
-  }
+  };
 
   return (
     <div>
-      <Sitebar/>
-      <Auth/>
+      <Sitebar />
+      <Auth updateToken={updateToken}/>
     </div>
   );
 }

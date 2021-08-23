@@ -25,7 +25,11 @@ router.post('/register', function (req, res) {
 router.post('/login', function(req, res) {
     User.findOne({
         where: {
+<<<<<<< HEAD
             username: req.body.user.username
+=======
+            user: req.body.user.username
+>>>>>>> 30605ddb2e9055c2dab0b0ce9f1afd83e7bd64f5
         }
     })
     .then(function loginSuccess(user) {

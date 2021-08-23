@@ -36,7 +36,11 @@ router.get("/", validateSession, (req, res) => {
     .catch(err => res.status(500).json({ error: err}))
 });
 
+<<<<<<< HEAD
 router.put("/update/:entryId", validateSession, (req, res) => {
+=======
+router.put("/update/:entryId", validateSession, function (req, res) {
+>>>>>>> 30605ddb2e9055c2dab0b0ce9f1afd83e7bd64f5
     const updateLogEntry = {
         description: req.body.log.description,
         definition: req.body.log.definition,
@@ -47,8 +51,13 @@ router.put("/update/:entryId", validateSession, (req, res) => {
     const query = { where: { id: req.params.entryId, owner_id: req.user.id } };
 
     Log.update(updateLogEntry, query)
+<<<<<<< HEAD
     .then((log) => res.status(200).json(log))
     .catch((err) => res.status(500).json({ error: err}))
+=======
+    .then((logs) => res.status(200).json(logs))
+    .catch((err) => res.status(500).json({ error: err}));
+>>>>>>> 30605ddb2e9055c2dab0b0ce9f1afd83e7bd64f5
 });
 
 router.delete("/delete/:id", validateSession, (req, res) => {
