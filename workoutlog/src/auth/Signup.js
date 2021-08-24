@@ -5,9 +5,19 @@ const Signup = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    let handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(username, password);
+        fetch('http://localhost:3000/user/register', {
+            method: 'POST',
+            body: JSON.stringify({user:{username: username, password: password}}),
+            headers: new Headers ({
+                'Content-Type': 'application/json'
+            })
+        }).then (
+        (response) => response.json()
+        ).then ((data) => {
+            props.updateToken(data.sessionToken)
+        })
     }
 
     return(
@@ -17,6 +27,7 @@ const Signup = (props) => {
                 <FormGroup>
                     <Label htmlFor="username">Username</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
+                    <p>Username is Required!</p>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>

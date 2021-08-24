@@ -16,6 +16,6 @@ app.use('/log', log);
 app.use('/user', user);
 
 
-app.listen(3456, function() {
-    console.log("App is listening on port 3456");
+app.listen(3000, function() {
+    console.log("App is listening on port 3000");
 });
