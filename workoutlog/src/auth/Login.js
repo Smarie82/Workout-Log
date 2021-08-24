@@ -7,7 +7,7 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch ('http://localhost:3000/user/login', {
+        fetch('http://localhost:3000/user/login', {
             method: 'POST',
             body: JSON.stringify({user:{username: username, password: password}}),
             headers: new Headers({
@@ -27,6 +27,7 @@ const Login = (props) => {
                 <FormGroup>
                     <Label htmlFor="username">Username</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
+                    <p>Username is Required!</p>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>

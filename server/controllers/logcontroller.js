@@ -15,18 +15,6 @@ router.post('/log', validateSession, (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 });
 
-// router.get("/", (req, res) => {
-//     Logbook.findAll()
-//     .then(logs => res.status(200).json(logs))
-//     .catch(err => res.status(500).json({ error: err }))
-// });
-
-// router.post("/", (req, res) => {
-//     Logbook.findAll()
-//     .then(logs => res.status(200).json(logs))
-//     .catch(err => res.status(500).json({ error: err }))
-// });
-
 router.get("/", validateSession, (req, res) => {
     let userid = req.user.id
     Log.findAll({
